@@ -1,7 +1,7 @@
 from playwright.sync_api import Page
 
 from constants import LOGIN_PAGE_URL_GET_STARTED
-from src.pages.base_page import BasePage
+from src.base_page import BasePage
 
 
 class MainPage(BasePage):

@@ -3,7 +3,7 @@ import time
 from playwright.sync_api import Page, TimeoutError, Position
 
 from constants import DEFAULT_WAITING_TIMEOUT_MS, BUILDER_LOADING_TIMEOUT_MS
-from src.pages.base_page import BasePage
+from src.base_page import BasePage
 
 
 class StageBuilderPage(BasePage):
