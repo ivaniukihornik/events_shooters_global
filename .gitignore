@@ -1,0 +1,4 @@
+__pycache__
+.idea
+/test_results/screenshots/*
+!/test_results/screenshots/.gitkeep
