@@ -3,7 +3,7 @@ from typing import Callable
 
 from playwright.sync_api import Page, Locator, TimeoutError
 
-from constants import DEFAULT_POLL_INTERVAL_S, SCREENSHOTS_DIR
+from constants import SCREENSHOTS_DIR, DEFAULT_WAITING_TIMEOUT_MS, MINIMAL_WAITING_TIMEOUT_MS
 
 
 class BasePage:
@@ -17,17 +17,16 @@ class BasePage:
     @staticmethod
     def poll_click(
             locator: Locator,
-            predicate: Callable,
-            timeout: int = DEFAULT_POLL_INTERVAL_S,
-            poll_interval: float = DEFAULT_POLL_INTERVAL_S
+            playwright_wait: Callable,
+            timeout_s: float = DEFAULT_WAITING_TIMEOUT_MS / 1000
     ) -> None:
-        end_time = time.time() + timeout
+        end_time = time.time() + timeout_s
         while time.time() < end_time:
-            locator.click()
             try:
-                predicate()
+                locator.click(timeout=MINIMAL_WAITING_TIMEOUT_MS)
+                playwright_wait()
             except TimeoutError:
-                time.sleep(poll_interval)
+                pass
             else:
                 return
 

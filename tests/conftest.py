@@ -3,9 +3,8 @@ from typing import Callable
 import pytest
 from playwright.sync_api import sync_playwright, ViewportSize
 
-from constants import MAIN_PAGE_URL, SCREEN_WIDTH, SCREEN_HEIGHT, LOGIN_PAGE_URL, STAGE_BUILDER_PAGE
+from constants import MAIN_PAGE_URL, SCREEN_WIDTH, SCREEN_HEIGHT, STAGE_BUILDER_PAGE
 from src.elements.header import Header
-from src.pages.login_page import LoginPage
 from src.pages.main_page import MainPage
 from src.pages.stage_builder_page import StageBuilderPage
 
@@ -48,13 +47,6 @@ def page_object(chrome_page) -> Callable:
 def main_page(chrome_page, page_object) -> Callable:
     def _page(is_open: bool = True) -> MainPage:
         return page_object(MAIN_PAGE_URL, MainPage, is_open)
-    return _page
-
-
-@pytest.fixture
-def login_page(chrome_page, page_object) -> Callable:
-    def _page(is_open: bool = True) -> LoginPage:
-        return page_object(LOGIN_PAGE_URL, LoginPage, is_open)
     return _page
 
 
